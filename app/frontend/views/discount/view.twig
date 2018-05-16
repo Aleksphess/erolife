@@ -1,0 +1,35 @@
+<div id="content">
+    <div class="crumbs">
+        <ul class="breadcrumbs" itemscope="" itemtype="">
+            <li class="breadcrumbs-item" itemprop="" itemscope="" itemtype="">
+                <a class="breadcrumbs-link" itemscope="" itemtype="" itemprop="" href="{{ Url.home() }}"><span itemprop="">EROLIFE</span></a>
+                <meta itemprop="" content="1">
+            </li>
+            <li class="breadcrumbs-item" itemprop="" itemscope="" itemtype="">
+                <a class="breadcrumbs-link" itemscope="" itemtype="" itemprop="" href="{{ Url.toRoute('/discounts') }}"><span itemprop="">Акции</span></a>
+                <meta itemprop="" content="2">
+            </li>
+            <li class="breadcrumbs-item" itemprop="" itemscope="" itemtype="">
+                <a class="breadcrumbs-link" itemscope="" itemtype="" itemprop="" disabled><span itemprop="">{{ discount.info.title }}</span></a>
+                <meta itemprop="" content="2">
+            </li>
+
+        </ul>
+    </div>
+    <h1 class="h1">{{ discount.info.title }}</h1>
+    <div class="shares-useful shares-page">
+        <div class="shares">
+            <div class="block-shares">
+                <div>
+                    <p>{{ discount.info.title }}</p>
+                    <p> {{ discount.info.description }}</p>
+
+                </div>
+                <img src="{{ discount.bimg }}" alt="{{ discount.info.title }}">
+            </div>
+        </div>
+        <div class="useful only-text">
+            {{ discount.info.text|raw }}
+            </div>
+    </div>
+</div>

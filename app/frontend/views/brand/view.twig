@@ -1,0 +1,34 @@
+
+<div id="content">
+    <div class="crumbs">
+        <ul class="breadcrumbs" itemscope="" itemtype="">
+            <li class="breadcrumbs-item" itemprop="" itemscope="" itemtype="">
+                <a class="breadcrumbs-link" itemscope="" itemtype="" itemprop="" href="{{ Url.home() }}"><span itemprop="">EROLIFE</span></a>
+                <meta itemprop="" content="1">
+            </li>
+            <li class="breadcrumbs-item" itemprop="" itemscope="" itemtype="">
+                <a class="breadcrumbs-link" itemscope="" itemtype="" itemprop="" href="{{ Url.toRoute('/brands') }}"><span itemprop="">Бренды</span></a>
+                <meta itemprop="" content="2">
+            </li>
+            <li class="breadcrumbs-item" itemprop="" itemscope="" itemtype="">
+                <a class="breadcrumbs-link" itemscope="" itemtype="" itemprop="" href="{{ brand.url }}"><span itemprop="">{{ brand.info.title }}</span></a>
+                <meta itemprop="" content="2">
+            </li>
+
+        </ul>
+    </div>
+    <div class="brands-item">
+        <h1 class="h1">{{ brand.info.title }}</h1>
+        <div class="brands-item__content">
+            <div class="brands-item__content_img"><img src="{{ brand.bimg }}" alt=""></div>
+
+            <div class="brands-item__content_text">{{ brand.info.txt|raw }}</div>
+
+        </div>
+    </div>
+    <div class="seo-text">
+        {{ Seo.get('text')|raw }}
+    </div>
+</div>
+
+

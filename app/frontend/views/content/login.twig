@@ -1,0 +1,27 @@
+<div id="content">
+    <div class="crumbs">
+        <ul class="breadcrumbs" itemscope="" itemtype="">
+            <li class="breadcrumbs-item" itemprop="" itemscope="" itemtype="">
+                <a class="breadcrumbs-link" itemscope="" itemtype="" itemprop="" href="{{ Url.home() }}"><span itemprop="">EROLIFE</span></a>
+                <meta itemprop="" content="1">
+            </li>
+            <li class="breadcrumbs-item" itemprop="" itemscope="" itemtype="">
+                <a class="breadcrumbs-link" itemscope="" itemtype="" itemprop="" disabled><span itemprop="">Регистрация</span></a>
+                <meta itemprop="" content="2">
+            </li>
+
+        </ul>
+    </div>
+    <h1 class="h1">регистрация</h1>
+    <form id="form-registration" class="form-registration" action>
+        <input class="name" name="username" type="text" placeholder="Имя" required>
+        <input type="tel" name="phone" title="099-999-99-99" placeholder="Номер телефона" pattern="0[0-9]{2}-[0-9]{3}-[0-9]{2}-[0-9]{2}" size="13" required>
+        <input type="email" name="email" placeholder="E-mail" required>
+        <input type="password" name="password" placeholder="Пароль" required>
+        <input type="password" name="confirm_password" placeholder="Подтверждение пороля" required>
+        <span>Подписаться на новости:</span>
+        <input class="" type="radio" name="subscription" value="yes" checked>Да
+        <input class="" type="radio" name="subscription" value="no">Нет
+        <input class="next" type="submit" value="зарегестрироваться">
+    </form>
+</div>

@@ -1,0 +1,51 @@
+{{ use('frontend/widgets/SLinkPager') }}
+
+<div id="content">
+    <div class="crumbs">
+        <ul class="breadcrumbs" itemscope="" itemtype="">
+            <li class="breadcrumbs-item" itemprop="" itemscope="" itemtype="">
+                <a class="breadcrumbs-link" itemscope="" itemtype="" itemprop="" href="{{ Url.home() }}"><span itemprop="">EROLIFE</span></a>
+                <meta itemprop="" content="1">
+            </li>
+            <li class="breadcrumbs-item" itemprop="" itemscope="" itemtype="">
+                <a class="breadcrumbs-link" itemscope="" itemtype="" itemprop="" disabled><span itemprop="">акции</span></a>
+                <meta itemprop="" content="2">
+            </li>
+
+        </ul>
+    </div>
+    <h1 class="h1">Акции</h1>
+    <div class="shares-useful shares-page">
+        {% for discount in discounts %}
+        <div class="all-shares shares">
+            <div class="block-shares">
+                <div>
+                    <p>{{ discount.info.title }}</p>
+                    <p> {{ discount.info.description }}</p>
+                    <a class="more-details" href="{{ discount.url }}">ПЕРЕЙТИ  ></a>
+                </div>
+                <img src="{{ discount.bimg }}" alt="{{ discount.info.title }}">
+            </div>
+            <div>
+                <a class="share-name" href="{{ discount.url }}">{{ discount.info.title }}</a>
+                <p class="share-date">{{ discount.creation_time|date('d.m.Y') }}</p>
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+
+    <div class="pagination">
+        {{ s_link_pager_widget({
+            'pagination' : pages,
+            'maxButtonCount' : 3,
+            'options' : {
+                'class' : 'pagination pagination-lg',
+            },
+            'linkOptions' : {
+                'class' : 'page-item',
+            },
+        }) }}
+
+    </div>
+</div>

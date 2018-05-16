@@ -1,0 +1,136 @@
+{{ use('frontend/assets/AppAsset') }}
+{{ use('frontend/widgets/HeadMenu') }}
+{{ use('frontend/widgets/BottomMenu') }}
+{{ register_app_asset(this) }}
+{{ this.beginPage }}
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+ 
+    <meta charset="{{ app.charset }}">
+    {{ html.csrfMetaTags | raw }}
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width">
+    <meta name="robots" content="NOINDEX, NOFOLLOW">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <title>{{ html.decode(Seo.get('title')) }}</title>
+    <meta name="description" content="{{ html.decode(Seo.get('description')) }}">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&amp;amp;subset=cyrillic" rel="stylesheet">
+    <!-- Chrome, Firefox OS and Opera-->
+    <meta name="theme-color" content="#e4002b">
+    <!-- Windows Phone-->
+    <meta name="msapplication-navbutton-color" content="#e4002b">
+    <!-- iOS Safari-->
+    <meta name="apple-mobile-web-app-status-bar-style" content="#e4002b">
+
+    {{  this.head  }}
+
+
+</head>
+<body>
+{{ this.beginBody }}
+
+<div id="header">
+    <div class="top-header">
+        <div class="site-info">
+            <div class="phones">
+                <a href="tel:+77772608889">+7 (777) 260 88 89</a>
+                <a href="tel:+77279786383">+7 (727) 978 63 83</a>
+                <a href="tel:+77009786383">+7 (700) 978 63 83 (WhatsApp)</a>
+            </div>
+            <p>Ежедневно с 10:00 до 20:00</p>
+            <div class="feedback">
+                <a href=""><button class="call-back">обратный звонок</button></a>
+                <div class="modal_form">
+                    <span class="modal_close"></span>
+                    <form id="call-back" action="">
+                        <input type="text" placeholder="Ваше имя" name="name">
+                        <input type="tel" name="phone" placeholder="Ваш номер телефона..." name="phone" required="" pattern="[\x1F-\xBF]*[^A-Za-zА-Яа-яЁё]" size="14">
+                        <input value="Отправить" type="submit">
+                    </form>
+                    <div class="js-text-call"></div>
+                </div>
+                <div class="overlay"></div>
+                <a href=""><button class="write-to-us">написать нам</button></a>
+                <div class="modal_form-2">
+                    <span class="modal_close"></span>
+                    <form id="write-to-us" action="">
+                        <input type="text" placeholder="Ваше имя" name="name">
+                        <input type="email" placeholder="Ваша почта" name="email" required="" size="14">
+                        <textarea name="text"></textarea>
+                        <input value="Отправить" type="submit">
+                    </form>
+                    <div class="js-text-write"></div>
+                </div>
+                <div class="overlay"></div>
+
+            </div>
+        </div>
+        <a href="{{ Url.home() }}" class="logo"><img src="/images/logo.png" alt=""></a>
+        <div class="menu-icons">
+            {% if app.user.isGuest %}
+            <p><a href="{{ Url.toRoute('/signin') }}">ВХОд</a> / <a href="{{ Url.toRoute('/login') }}">регистрация</a></p>
+            {% else %}
+            <p><a href="{{ Url.toRoute('/user/index') }}">Профиль</a> / <a href="{{ Url.toRoute('/logout') }}">выйти</a></p>
+            {% endif %}
+            <div class="icons">
+                <a href="{{ Url.toRoute('/comparasion') }}" class="balance"></a>
+                <a href="{{ Url.toRoute('/backet') }}" class="basket"></a>
+                {% if not(app.user.isGuest) %}
+                <a href="{{ Url.toRoute('/user/index') }}" class="favorite"></a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <div class="line"></div>
+    {{ head_menu_widget() }}
+</div>
+
+{{ content | raw }}
+
+
+<div id="footer">
+    <div class="grad">
+        <div class="subscription">
+            <p class="subscription__name">БУДЬТЕ В КУРСЕ СОБЫТИЙ!</p>
+            <p class="subscription__text">Подпишитесь на рассылку от нашего магазина</p>
+        </div>
+        <form id="subscription" >
+            <input type="email" name="email" placeholder="Ваш E-mail">
+            <input type="submit" name="" value="ПОДПИСАТЬСЯ">
+            <div class="js-text-subscription"></div>
+        </form>
+    </div>
+    <div class="footer-content">
+        {{ bottom_menu_widget() }}
+        <div class="footer-info">
+            <span class="footer-info__name">Свяжитесь с нами:</span>
+            <div class="footer-info__contacts">
+                <a href="tel:+77772608889" class="footer-info__contacts_phone">+7 (777) 260 88 89</a>
+                <a href="tel:+77279786383" class="footer-info__contacts_phone">+7 (700) 978 63 83</a>
+                <a href="tel:+77279786383" class="footer-info__contacts_phone">+7 (727) 978 63 83</a>
+            </div>
+            <div class="footer-info__schedule">
+                <p class="footer-info__schedule_info"><span class="graph">График работы:</span>&nbsp;&nbsp;&nbsp;&nbsp;Ежедневно   10:00 - 20:00</p>
+                <div class="footer-info__social">
+                    <a href=""><img src="/images/closed-envelope-circle.svg" alt=""></a>
+                    <a href=""><img src="/images/facebook-social-media-38e358ed4a49d2ba.svg" alt=""></a>
+                    <a href=""><img src="/images/vk-social-media-30e7c557bc2ab7f2.svg" alt=""></a>
+                    <a href=""><img src="/images/Viber.svg" alt=""></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{ this.endBody }}
+
+</body>
+</html>
+{{ this.endPage }}
+
+
+</body>
+</html>

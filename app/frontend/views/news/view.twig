@@ -1,0 +1,54 @@
+
+<div id="content">
+    <div class="crumbs">
+        <ul class="breadcrumbs" itemscope="" itemtype="">
+            <li class="breadcrumbs-item" itemprop="" itemscope="" itemtype="">
+                <a class="breadcrumbs-link" itemscope="" itemtype="" itemprop="" href="{{ Url.home() }}"><span itemprop="">EROLIFE</span></a>
+                <meta itemprop="" content="1">
+            </li>
+            <li class="breadcrumbs-item" itemprop="" itemscope="" itemtype="">
+                <a class="breadcrumbs-link" itemscope="" itemtype="" itemprop="" href="{{ Url.toRoute('/news') }}"><span itemprop="">Акции</span></a>
+                <meta itemprop="" content="2">
+            </li>
+            <li class="breadcrumbs-item" itemprop="" itemscope="" itemtype="">
+                <a class="breadcrumbs-link" itemscope="" itemtype="" itemprop="" disabled><span itemprop="">{{ news.info.title }}</span></a>
+                <meta itemprop="" content="2">
+            </li>
+
+        </ul>
+    </div>
+    <h1 class="h1">{{ news.info.title }}</h1>
+    <div class="news-item-page">
+        <div class="news-item">
+
+            <img src="{{ news.bimg }}" alt="{{ news.info.title }}" class="img-left">
+            {{ news.info.text|raw }}
+        </div>
+        {% if news.feedbacks %}
+        <p class="h1">Комментарии</p>
+        <div class="two-items owl-carousel owl-theme">
+            {% for feedback in news.feedbacks %}
+            <div class="item">
+                <div class="review-block">
+                    <p class="name-date"><span>{{ feedback.name }}</span><span>{{ feedback.creation_time|date('d.m.Y') }}</span></p>
+                    <p class="review">{{ feedback.text }} </p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <a href="#" class="next spoiler-trigger">Оставить комментарий</a>
+        <form id="new-news" class="spoiler-block">
+            <input class="spoiler-block__name" type="text" name="name" placeholder="Ваше имя" name="name" required>
+            <textarea class="spoiler-block__text" name="text" name="text" required></textarea>
+            <input type="hidden" value="{{ news.id }}" name="id">
+            <input class="spoiler-block__submit next" value="Отправить" type="submit">
+        </form>
+
+        <div class="modal_form_comment">
+            <span class="modal_close"></span>
+            <p>Спасибо за ваш отзыв</p>
+        </div>
+    </div>
+</div>

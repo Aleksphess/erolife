@@ -1,0 +1,31 @@
+<nav class="breadcrumbs">
+    <div class="container"><a class="breadcrumbs__item" href="{{ Url.home() }}">{{this.params.main}}</a><a class="breadcrumbs__item" disabled>{{this.params.personal_account}}</a>
+    </div>
+</nav>
+<main class="registration">
+    <div class="container">
+        <h1 class="page__title">Восстановить пароль</h1>
+        <div class="row">
+            <div class="col col--6-of-12 col--s-12-of-12 col--m-12-of-12 col--l-6-of-12">
+                <form class="form form--login js-form-forgot" id="" action="">
+                    <div class="form__title">Восстановить пароль</div>
+                    <div class="form__field">
+                        <label class="form__label">Email</label>
+                        <input class="form__input" type="text" name="email">
+                    </div>
+
+                    <div class="form__action">
+                        {#
+                                                <div class="is--fl"><a class="link" href="">{{this.params.forgot_pass}}</a></div>
+                        #}
+                        <div class="is--fr">
+                            <button class="btn btn--primary btn--sm" type="submit">Восстановить</button>
+                        </div>
+                    </div>
+                    <div class="js-answer"></div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</main>

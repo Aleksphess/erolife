@@ -1,0 +1,127 @@
+
+<div id="content">
+    <div class="fadeOut owl-carousel owl-theme">
+        {%  for slide in slides %}
+        <div class="item">
+            <img src="{{ slide.bimg }}" alt="{{ slide.info.title }}">
+            <div class="content-inside">
+                <div class="content-inside__text">
+                    <p class="content-inside__text_slogan">{{ slide.info.title }}</p>
+                    <a class="more-details" href="{{ slide.href }}">перейти    ></a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+    {%  if products_new %}
+
+    <div class="novelties">
+        <p class="name-block">новинки на сайте</p>
+        <div class="blocks-fore-items">
+            {% for product in products_new %}
+            <div class="blocks-fore-items__item ">
+                    <span>
+                        <img src="{{ product.bimg }}" alt="{{ product.info.name }}">
+                        <a class="add-to-cart">
+                            <button class="add-to-cart__button js-add-to-cart" data-id="{{ product.id }}">в корзину</button>
+                        </a>
+                    </span>
+                <a href="{{ product.url }}" class="name-product">{{ product.info.name }}</a>
+                {% if product.price_old %}<p class="price"><span>$ {{ product.price_old }}</span><span>{{ product.price }}</span></p>
+                {% else %}<p class="price">$ {{ product.price }}</p>
+                {% endif %}
+            </div>
+            {% endfor %}
+
+        </div>
+
+    </div>
+    {% endif %}
+
+    {% if products_discount %}
+    <div class="promotional">
+        <p class="name-block">акционные товары</p>
+        <div class="blocks-fore-items act">
+            {% for product in products_discount %}
+            <div class="blocks-fore-items__item">
+                    <span>
+                        <img src="{{ product.bimg }}" alt="{{ product.info.name }}">
+                        <a class="add-to-cart">
+                            <button class="add-to-cart__button js-add-to-cart" data-id="{{ product.id }}">в корзину</button>
+                        </a>
+                    </span>
+                <a href="{{ product.url }}" class="name-product">{{ product.info.name }}</a>
+                {% if product.price_old %}<p class="price"><span>$ {{ product.price_old }}</span><span>{{ product.price }}</span></p>
+                {% else %}<p class="price">$ {{ product.price }}</p>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+
+    </div>
+    {%  endif %}
+
+    {% if products_week %}
+    <div class="goods-week">
+        <p class="name-block">Товары недели</p>
+        <div class="week owl-carousel owl-theme">
+            {% for product in products_week %}
+                <div class="blocks-fore-items__item">
+                    <span>
+                        <img src="{{ product.bimg }}" alt="{{ product.info.name }}">
+                        <a class="add-to-cart">
+                            <button class="add-to-cart__button js-add-to-cart" data-id="{{ product.id }}">в корзину</button>
+                        </a>
+                    </span>
+                    <a href="{{ product.url }}" class="name-product">{{ product.info.name }}</a>
+                    {% if product.price_old %}<p class="price"><span>$ {{ product.price_old }}</span><span>{{ product.price }}</span></p>
+                    {% else %}<p class="price">$ {{ product.price }}</p>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+    <div class="partners">
+        <div class="block-partners">
+            <div class="week owl-carousel owl-theme invers">
+                {% for brand in brands %}
+                <div class="item">
+                    <img src="{{ brand.logomain }}" alt="">
+                </div>
+                {%  endfor %}
+            </div>
+        </div>
+    </div>
+
+    <div class="shares-useful">
+        <div class="shares">
+            <p class="name-block">акции</p>
+            <div class="block-shares">
+                <div class="block-shares__content">
+                    <p class="block-shares__content_name">{{ discount.info.title }}</p>
+                    <p class="block-shares__content_percent"> {{ discount.info.description }}</p>
+                    <a href="{{ discount.url }}">
+                        <button class="more-details">ПЕРЕЙТИ  ></button>
+                    </a>
+                </div>
+                <img src="{{ discount.bimg }}" alt="{{ discount.info.title }}">
+            </div>
+        </div>
+        <div class="useful">
+            <p class="name-block">полезное</p>
+            <ul class="useful-menu">
+                {% for page in pages %}
+                <li><a href="{{ page.url }}">{{ page.info.title }}</a></li>
+                {% endfor %}
+
+            </ul>
+        </div>
+    </div>
+
+    <div class="seo-text">
+            {{ Seo.get('text')|raw }}
+    </div>
+</div>

@@ -1,0 +1,73 @@
+<section class="section">
+    <div class="container">
+        <h3 class="section__title is--centered">{{this.params.order_sause}}</h3>
+        <div class="products-slider">
+            <div class="products-slider__inner js-products-slider">
+                {% for product in products %}
+                    <div class="products-slider__item">
+                        <form class="product js-product-{{ product.id }}" action="/order">
+                            <article class="product__inner">
+
+                                <h2 class="product__title is--tl">
+                                    <a href="{{ product.url }}">{{ product.info.title }}</a>
+                                </h2>
+                                <div class="product__left">
+                                    <a class="product__photo" href="{{ product.url }}"><img src="{{ product.bimg }}" alt="">
+                                        {% if product.label %}<span class="product__tag product-tag is--{{ product.label.alias }}">{{ product.label.info.title }}</span>
+                                        {% else %}{% endif %}</a>
+                                    <div class="product__variants is--special">
+                                        {% for param in product.params %}
+                                            <div class="product__variants-item product-variant" >
+                                                <input class="product__variants-item-radio product-variant__radio"  data-id="{{ param.id }}" type="radio" name="diameter1" id="d{{ param.id }}" value="{{ param.price }}" {% if loop.first %}checked{% endif %}>
+                                                <label class="product__variants-item-label product-variant__label" data-parent="{{ product.id }}" data-id="{{ product.id }}" data-price="{{ param.price }}" for="d{{ param.id }}">{% if param.info.type=='cm' or param.info.type=='см' %}<i class="icon icon-diameter product-variant__icon"></i>{% endif %}<span class="product__variants-item-value product-variant__value">{{ param.value }} </span><span class="product__variants-item-dimension product-variant__dimension">{{ param.info.type }}</span></label>
+                                            </div>
+                                        {% endfor %}
+
+                                    </div></div>
+                                {#  <!-- Добавки-->
+                                  {% if product.topics %}
+                              <div class="product__additives js-product__additives">
+                                  <div class="product__additives-toggler"><span>{{this.params.adders}}</span><i class="icon icon-plus-red"></i></div>
+                                  <!-- Добавки - список-->
+                                  <div class="product__additives-details js-product__additives-details"><i class="product__additives-close icon-close-small"></i>
+                                      <ul class="product__additives-list">
+                                          {% for topic in product.topics %}
+                                              <li class="product__additives-item"><span class="product__additives-item-title">{{ topic.topic.info.title }}</span><span class="product__additives-item-qty"><span class="product__additive-qty js-additive-qty">
+                                                  <i data-id="{{ product.id }}" data-topic="{{ topic.topic.id }}" data-price="{{ topic.topic.price }}" class="js-change-topic-price icon icon-minus-small js-additive-qty-minus product__additive-qty-minus"></i>
+                                      <input data-price="{{ topic.topic.price }}" data-id="{{ topic.topic.id }}" class="product__additive-qty-value js-additive-qty-value js-topic-price-{{ topic.topic.id }}" type="text" name="additive_0" value="0">
+                                                  <i data-id="{{ product.id }}" data-topic="{{ topic.topic.id }}" data-price="{{ topic.topic.price }}" class="js-change-topic-price icon icon-plus-small js-additive-qty-plus product__additive-qty-plus"></i></span></span>
+                                                  <span class="product__additives-item-price "><span class="js-topic-price-{{ topic.topic.id }}">{{ topic.topic.price }} </span><span class="product__additives-item-currency">{{this.params.tng}}</span></span></li>
+                                          {% endfor %}
+                                      </ul>
+                                      <!-- Кнопка Применить-->
+                                      #}{#<button class="product__action product__action--secondary " data-id="{{ product.id }}" type="button" #}{##}{#formaction="" formmethod="post"#}{##}{#>{{this.params.apply}}</button>#}{#
+                                  </div>
+                              </div>
+                              {% endif %}#}
+                                <!-- Варианты-->
+                                <div class="product__right">
+
+                                    <!-- Кол-во -->
+                                    <div class="product__qty">
+                                        <div class="product-qty js-qty">
+                                            <i class="product-qty__minus icon icon-minus js-qty-minus js-count-in" data-id="{{ product.id }}"></i>
+                                            <input class="product-qty__value js-qty-value js-qty-{{ product.id }}" data-id="{{ product.id }}" type="text" name="product_qty" value="1">
+                                            <i class="product-qty__plus icon icon-plus js-qty-plus js-count-in" data-id="{{ product.id }}"></i>
+                                        </div>
+                                    </div>
+                                    <!-- Стоимость-->
+
+                                    <div class="product__price"><span class="product__price-value "><span class="js-product-price-{{ product.id }}">{{ product.price }}</span></span><span class="product__price-currency">{{this.params.tng}}</span></div>
+
+                                    <!-- Кнопка заказать-->
+                                    <a data-id="{{ product.id }}" class="product__action js-add-to-cart" type="button" data-modal="cartOrder">{{this.params.make_order}}</a>
+                                </div>
+                            </article>
+                        </form>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+    </div>
+</section>

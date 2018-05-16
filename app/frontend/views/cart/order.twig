@@ -1,0 +1,67 @@
+<div id="content">
+    <div class="crumbs">
+        <ul class="breadcrumbs" itemscope="" itemtype="">
+            <li class="breadcrumbs-item" itemprop="" itemscope="" itemtype="">
+                <a class="breadcrumbs-link" itemscope="" itemtype="" itemprop="" href="{{ Url.home() }}"><span itemprop="">EROLIFE</span></a>
+                <meta itemprop="" content="1">
+            </li>
+            <li class="breadcrumbs-item" itemprop="" itemscope="" itemtype="">
+                <a class="breadcrumbs-link" itemscope="" itemtype="" itemprop="" href="{{ Url.toRoute('/backet') }}"><span itemprop="">Корзина</span></a>
+                <meta itemprop="" content="2">
+            </li>
+            <li class="breadcrumbs-item" itemprop="" itemscope="" itemtype="">
+                <a class="breadcrumbs-link" itemscope="" itemtype="" itemprop="" href="{{ Url.toRoute('/order') }}"><span itemprop="">Оформление заказа</span></a>
+                <meta itemprop="" content="2">
+            </li>
+
+        </ul>
+    </div>
+    <h1 class="h1">оформление заказа</h1>
+    <div class="ordering">
+        <form id="send-mas" action>
+            <p class="ordering__headers">1. Личные данные</p>
+            <input class="ordering__name" type="text" name="first-name" required placeholder="Имя" value="{{ app.user.identity.username }}">
+            <input class="ordering__email" type="email" name="email" required placeholder="Email" value="{{ app.user.identity.email }}">
+            <input class="ordering__last-name" type="text" name="last-name"  placeholder="Фамилия" >
+            <input class="ordering__phone" type="tel" name="phone" title="099-999-99-99" placeholder="Номер телефона" value="{{ app.user.identity.phone }}" required pattern="0[0-9]{2}-[0-9]{3}-[0-9]{2}-[0-9]{2}" size="13">
+            <p class="ordering__headers">2. сопособ доставки</p>
+            <div class="ordering__radio">
+                <div><img width="180" src="/images/0_01.png" alt=""><input type="radio" name="delivery" value="1" checked><label>Почтой</label></div>
+                <div><img width="180" src="/images/0_02.png" alt=""><input type="radio" name="delivery" value="7"><label>Самовывоз</label></div>
+                <div><img width="180" src="/images/0_03.png" alt=""><input type="radio" name="delivery" value="12"><label>Курьером</label></div>
+            </div>
+            <p class="ordering__headers">3. Адрес доставки</p>
+            <input class="ordering__city" type="text" name="address" required placeholder="Город">
+            <input class="ordering__street" type="text" name="street" required placeholder="Улица">
+            <input class="ordering__house" type="text" name="build" required placeholder="Дом">
+            <p class="ordering__headers">4. сопособ оплаты</p>
+            <div class="ordering__radio">
+                <div><img width="180" src="/images/0_07.png" alt=""><input type="radio" name="payment" value="9" checked><label>Карточкой</label></div>
+                <div><img width="180" src="/images/0_08.png" alt=""><input type="radio" name="payment" value="2"><label>Наличными</label></div>
+                <div><img width="180" src="/images/0_09.png" alt=""><input type="radio" name="payment" value="10"><label>Наложенным платежем</label></div>
+            </div>
+            <textarea class="ordering__comment" name="comment"  id="comment" cols="100" rows="10" placeholder="Комментарии"></textarea>
+            <div class="ordering__totals">
+                <div class="totals__first">
+                    <div class="totals__count"><span>Кличество товаров:</span><span class="numeric">{{ count }} шт.</span></div>
+                    <div class="totals__price"><span>Стоимость товаров:</span><span class="numeric fullprice">$ {{ fullprice }}</span></div>
+                    <div class="totals__delivery"><span>Доставка:</span><span class="numeric delivery">$ 20.00</span></div>
+                </div>
+                <div class="totals__second">
+
+                    <div class="totals__all-prices"><span>Общая стоимость:</span><span class="numeric">$ {{ fullprice+20 }}</span></div>
+                </div>
+            </div>
+            <div class="ordering__button">
+                <a class="popup"><button class="next">продолжить покупки</button></a>
+                <input class="js-button-send" type="submit" value="оформить заказ">
+            </div>
+        </form>
+
+        <div class="thx">
+            <span class="modal_close"></span>
+            <p class="">Спасибо за ваш заказ</p>
+        </div>
+        <div class="overlay"></div>
+    </div>
+</div>

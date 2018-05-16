@@ -1,0 +1,157 @@
+<div id="content">
+    <div class="crumbs">
+        <ul class="breadcrumbs" itemscope="" itemtype="">
+            <li class="breadcrumbs-item" itemprop="itemListElement" itemscope="" itemtype="">
+                <a class="breadcrumbs-link" itemscope="" itemtype="" itemprop="item" href="{{ Url.home() }}"><span itemprop="name">EROLIFE</span></a>
+                <meta itemprop="position" content="1">
+            </li>
+            {% if product.parent.parent.parent %}
+                <li class="breadcrumbs-item" itemprop="" itemscope="" itemtype="">
+                    <a class="breadcrumbs-link" itemscope="" itemtype="" itemprop="" href="{{ product.parent.parent.parent.url }}"><span itemprop="">{{ product.parent.parent.parent.info.name }}</span></a>
+                    <meta itemprop="" content="2">
+                </li>
+            {% endif %}
+            {% if product.parent.parent %}
+                <li class="breadcrumbs-item" itemprop="" itemscope="" itemtype="">
+                    <a class="breadcrumbs-link" itemscope="" itemtype="" itemprop="" href="{{ product.parent.parent.url }}"><span itemprop="">{{ product.parent.parent.info.name }}</span></a>
+                    <meta itemprop="" content="2">
+                </li>
+            {% endif %}
+            {% if product.parent %}
+                <li class="breadcrumbs-item" itemprop="" itemscope="" itemtype="">
+                    <a class="breadcrumbs-link" itemscope="" itemtype="" itemprop="" href="{{ product.parent.url }}"><span itemprop="">{{ product.parent.info.name }}</span></a>
+                    <meta itemprop="" content="2">
+                </li>
+            {% endif %}
+            <li class="breadcrumbs-item" itemprop="" itemscope="" itemtype="">
+                <a disabled class="breadcrumbs-link" itemscope="" itemtype="" itemprop="" ><span itemprop="">{{ product.info.name }}</span></a>
+                <meta itemprop="" content="2">
+            </li>
+        </ul>
+    </div>
+    <div class="product">
+        <div class="product__info">
+            <div class="product__info_block-img">
+                {% if product.imgs|length>=2 %}
+                <div class="mini">
+                    {% for img in product.imgs %}
+                    <img src="{{   img.simg }}" data-large="{{ img.bimg }}" />
+                    {% endfor %}
+                </div>
+                {% endif %}
+                <div class="large">
+                    <a class="example-image-link" href="{{ product.bimg }}" data-lightbox="example-set" data-title="Названеи товара"><img src="{{ product.bimg }}" /></a>
+                </div>
+            </div>
+            <div class="product__info_block-text">
+                <h1 class="h1">{{ product.info.name }}</h1>
+                <div class="block-text__table">
+                    <ul>
+                        {% for params in product.extraparams %}
+                            <li><span class="name-characteristic">{{ params.param_name }}</span><span class="characteristic">{{ params.value_name }}</span></li>
+                        {% endfor %}
+
+                    </ul>
+                </div>
+                <div class="block-text__another-info">
+                    <a href="">
+                        <button class="block-text__another-info_but js-add-to-cart-product" data-id="{{ product.id }}">в корзину</button>
+                    </a>
+                    <div class="block-text__another-info_price">
+                        {% if product.price_old %}
+                            <p>$ {{ product.price_old }}</p>
+                            <p>$ {{ product.price }}</p>
+                        {% else %}
+                            <p>$ {{ product.price }}</p>
+                        {% endif %}
+                    </div>
+                    <div class="block-text__another-info_count basket__item_number">
+                        <span class="minus"><img src="/images/minus.svg" alt=""></span>
+                        <input class="number_input" disabled type="number" value="1" max="3" size="3">
+                        <span class="plus"><img src="/images/plus.svg" alt=""></span>
+                    </div>
+                    <div class="block-text__another-info_actions">
+                        <a class="balance js-balance" data-id="{{ product.id }}" ></a>
+                        <a class="favorite js-favorite" data-id="{{ product.id }}" href=""></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="product__characteristic">
+            <div class="w3-bar">
+                <button class="w3-bar-item active" onclick="openProduct('1')">ОПисание</button>
+                <button class="w3-bar-item" onclick="openProduct('2')">ОТЗЫВЫ</button>
+                <button class="w3-bar-item" onclick="openProduct('3')">Характеристики</button>
+                <button class="w3-bar-item" onclick="openProduct('4')">Оставить отзыв</button>
+            </div>
+            <div id="1" class="w3-container tab" style="display:block">
+                <div class="tab-content">
+                    {{ product.info.txt|raw }}
+                </div>
+            </div>
+            <div id="2" class="w3-container tab" style="display:none">
+                <div class="tab-content">
+                    {% if product.feedbacks %}
+
+                        <div class="two-items owl-carousel owl-theme">
+                            {% for feedback in product.feedbacks %}
+                                <div class="item">
+                                    <div class="review-block">
+                                        <p class="name-date"><span>{{ feedback.name }}</span><span>{{ feedback.creation_time|date('d.m.Y') }}</span></p>
+                                        <p class="review">{{ feedback.text }} </p>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            <div id="3" class="w3-container tab" style="display:none">
+                <div class="tab-content">
+                    {% for params in product.extraparams %}
+                      <p>{{ params.param_name }} - {{ params.value_name }}</p>
+                    {% endfor %}
+                </div>
+            </div>
+            <div id="4" class="w3-container tab" style="display:none">
+                <div class="tab-content">
+                    <form id="save-new-product-feedback" class="spoiler-block in-card-pr">
+                        <input class="spoiler-block__name" type="text" name="name" placeholder="Ваше имя" name="name" required>
+                        <textarea class="spoiler-block__text" name="text" name="text" required></textarea>
+                        <input type="hidden" value="{{ product.id }}" name="id">
+                        <input class="spoiler-block__submit next" value="Отправить" type="submit">
+                    </form>
+
+                    <div class="modal_form_comment">
+                        <span class="modal_close"></span>
+                        <p>Спасибо за ваш отзыв</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="product__this-category">
+            <p class="h1">товары из этой рубрики</p>
+            <div class="week owl-carousel owl-theme">
+                {% for product in current_products %}
+                <div class="item blocks-fore-items__item">
+                        <span>
+                            <img src="{{ product.bimg }}" alt="">
+                            <a class="add-to-cart">
+                                <button class="add-to-cart__button js-add-to-cart" data-id="{{ product.id }}">в корзину</button>
+                            </a>
+                        </span>
+                    <a href="{{ product.url }}" class="name-product">{{ product.info.name }}</a>
+                    {% if product.price_old %}<p class="price"><span>$ {{ product.price_old }}</span><span>{{ product.price }}</span></p>
+                    {% else %}<p class="price">$ {{ product.price }}</p>
+                    {% endif %}
+                </div>
+                {% endfor %}
+
+
+            </div>
+        </div>
+    </div>
+    <div class="seo-text">
+        {{ Seo.get('text')|raw }}
+    </div>
+</div>

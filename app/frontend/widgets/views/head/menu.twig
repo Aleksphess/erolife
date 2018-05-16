@@ -1,0 +1,45 @@
+<div class="bottom-header">
+    <ul class="main-menu">
+        {% for item in menu %}
+        <li class="main-menu__list"><a href="{{ item.url }}" class="main-menu__list_link">{{ item.info.name }}</a>
+            {% if item.childs %}
+            <ul class="menu-subcategory">
+                {% for child in item.childs %}
+                <li class="menu-subcategory__li"><a href="{{ child.url }}">{{ child.info.name }}</a>
+                    {% if child.childs %}
+                    <ul class="menu-subcategory">
+                        {% for grandchild in child.childs %}
+                        <li class="menu-subcategory__li"><a href="{{ grandchild.url }}">{{ grandchild.info.name }}</a></li>
+                       {% endfor %}
+                    </ul>
+                    {% endif %}
+                </li>
+                {% endfor %}
+
+            </ul>
+            {% endif %}
+        </li>
+        {% endfor %}
+
+        <li class="main-menu__list"><a href="{{ Url.toRoute('/brands') }}" class="main-menu__list_link">бренды</a></li>
+    </ul>
+    <div class="adaptive-menu">
+        <div class="adaptive-menu__open-menu">
+            <img width="40" src="/images/menu.svg">
+        </div>
+        <div class="adaptive-menu__full-menu">
+            <div class="adaptive-menu__close-menu">
+                <img src="/images/close.svg" alt="">
+            </div>
+            <ul class="adaptive-menu__menu-top">
+                {% for item in menu %}
+                <li class="adaptive-menu__menu-top_li"><a href="{{ item.url }}">{{ item.info.name }}</a></li>
+                {% endfor %}
+                <li class="adaptive-menu__menu-top_li"><a href="brands.php">бренды</a></li>
+                <li class="adaptive-menu__menu-top_li"><a href="tel:+77772608889">+7 (777) 260 88 89</a></li>
+                <li class="adaptive-menu__menu-top_li"><a href="tel:+77279786383">+7 (727) 978 63 83</a></li>
+                <li class="adaptive-menu__menu-top_li"><a href="tel:+77009786383">+7 (700) 978 63 83 (WhatsApp)</a></li>
+            </ul>
+        </div>
+    </div>
+</div>

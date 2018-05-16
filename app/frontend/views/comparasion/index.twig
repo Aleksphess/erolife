@@ -1,0 +1,57 @@
+<div id="content">
+    <div class="crumbs">
+        <ul class="breadcrumbs" itemscope="" itemtype="">
+            <li class="breadcrumbs-item" itemprop="" itemscope="" itemtype="">
+                <a class="breadcrumbs-link" itemscope="" itemtype="" itemprop="" href="{{ Url.home() }}"><span itemprop="">EROLIFE</span></a>
+                <meta itemprop="" content="1">
+            </li>
+            <li class="breadcrumbs-item" itemprop="" itemscope="" itemtype="">
+                <a class="breadcrumbs-link" itemscope="" itemtype="" itemprop="" disabled><span itemprop="">Сравнения</span></a>
+                <meta itemprop="" content="2">
+            </li>
+
+        </ul>
+    </div>
+    <h1 class="h1">Сравнения</h1>
+    <div class="compare">
+        <div class="compare__categories-characteristics my-height">
+            <div class="compare__categories">
+                <p class="compare__categories_name">Категории:</p>
+                {% for category in categories %}
+                <p class="compare__categories_name {% if alias %} {% if category.name_alt==alias %}active{% endif %}
+                    {% else %}{% if loop.first %}active{% endif %}{% endif %}"><a href="{{ category.comparasionurl }}">{{ category.info.name }}</a></p>
+                {% endfor %}
+            </div>
+            <ul class="compare__characteristics">
+                {% for f in filter %}
+                <li class="compare__characteristics_list">{{ f.name }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="compare__products my-height">
+            {% for product in products %}
+            <div class="blocks-fore-items__item">
+                    <span>
+                        <img src="{{ product.bimg }}" alt="">
+                    </span>
+
+                <a href="{{ product.url }}" class="name-product">{{ product.info.name }}</a>
+                <p class="price">$ {{ product.price }}</p>
+                <button class="close js-delete-comparasion" data-id="{{ product.id }}"></button>
+                <ul class="compare__characteristics">
+                    {% for param in product.extraparams  %}
+                    <li class="compare__characteristics_list">{{ param.value_name }}</li>
+                    {% endfor %}
+
+                </ul>
+            </div>
+            {% endfor %}
+
+        </div>
+    </div>
+    <p class="compare__unavailable">Страница недоступна при этом разрешении экрана</p>
+    <div class="seo-text">
+        {{ Seo.get('text')|raw }}
+    </div>
+</div>

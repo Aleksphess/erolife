@@ -1,0 +1,105 @@
+<div id="content">
+    <div class="crumbs">
+        <ul class="breadcrumbs" itemscope="" itemtype="">
+            <li class="breadcrumbs-item" itemprop="itemListElement" itemscope="" itemtype="">
+                <a class="breadcrumbs-link" itemscope="" itemtype="" itemprop="item" href="/"><span itemprop="name">EROLIFE</span></a>
+                <meta itemprop="position" content="1">
+            </li>
+            <li class="breadcrumbs-item" itemprop="itemListElement" itemscope="" itemtype="">
+                <a class="breadcrumbs-link" itemscope="" itemtype="" itemprop="item" href=""><span itemprop="name">Прошлая страница</span></a>
+                <meta itemprop="position" content="2">
+            </li>
+            <li class="breadcrumbs-item" itemprop="itemListElement" itemscope="" itemtype="">
+                <a class="breadcrumbs-link" itemscope="" itemtype="" itemprop="item" href=""><span itemprop="name">Следующая страница</span></a>
+                <meta itemprop="position" content="3">
+            </li>
+        </ul>
+    </div>
+    <h1 class="h1">личный кабинет</h1>
+    <div class="per-account">
+        <div class="w3-bar">
+            <span class="w3-bar-item active" onclick="openProduct('1')">Добро пожаловать</span>
+            <span class="w3-bar-item" onclick="openProduct('2')">Профиль</span>
+            <span class="w3-bar-item" onclick="openProduct('3')">История покупок</span>
+            <span class="w3-bar-item" onclick="openProduct('4')">Избранные товары</span>
+        </div>
+        <div id="1" class="w3-container tab" style="display:block">
+            <div class="tab-content">
+                <div>
+                    <p class="h1">Добро пожаловать</p>
+                    <p>Не следует, однако забывать, что рамки и место обучения кадров играет важную роль в формировании соответствующий условий активизации. Задача организации, в особенности же начало повседневной работы по формированию позиции играет важную роль в формировании форм развития.</p>
+                </div>
+                <img src="/images/logo_d.png" alt="">
+            </div>
+        </div>
+        <div id="2" class="w3-container tab" style="display:none">
+            <div class="tab-content">
+                <form id="form-registration" class="form-change" action>
+                    <input class="name" name="username" type="text" placeholder="Имя"  value="{{ app.user.identity.username }}" required>
+                    <input type="tel" name="phone" title="099-999-99-99" placeholder="Номер телефона" pattern="0[0-9]{2}-[0-9]{3}-[0-9]{2}-[0-9]{2}" size="13" value="{{ app.user.identity.phone }}" required>
+                    <input type="email" name="email" placeholder="E-mail" value="{{ app.user.identity.email }}" required>
+                    <input class="next" type="submit" value="изменить">
+                    <span class="js-change-settings"></span>
+                </form>
+
+            </div>
+        </div>
+        <div id="3" class="w3-container tab" style="display:none">
+
+            <div class="tab-content">
+                <ol class="bought-products">
+                    {% for order in app.user.identity.orders %}
+                    <li class="bought-products__item">
+
+                        <div class="bought-products__item_id">
+                            <span>Номер заказа:</span><span>{{ order.id }}</span>
+                        </div>
+                        {% for item in order.itemss %}
+                        <div class="bought-products__item_product">
+                            <div class="bought-products__item_name">
+                                <span>Название товара:</span><span>{{ item.name }}</span>
+                            </div>
+                            <div class="bought-products__item_price">
+                                <span>Цена товара:</span><span>$ {{ item.price }}</span>
+                            </div>
+                            <div class="bought-products__item_price">
+                                <span>Количество:</span><span> {{ item.count }}</span>
+                            </div>
+                        </div>
+                        {% endfor %}
+
+                        <div class="bought-products__sum-price">
+                            <span>Сумма:</span><span>$ {{ order.total }}</span>
+                        </div>
+                    </li>
+                    {% endfor %}
+
+                </ol>
+            </div>
+
+        </div>
+        <div id="4" class="w3-container tab" style="display:none">
+            <div class="tab-content">
+            <div class="blocks-fore-items">
+                {% if  app.user.identity.favorites  %}
+                    {% for favorite in app.user.identity.favorites %}
+                        <div class="blocks-fore-items__item">
+                                        <span>
+                                            <img src="{{ favorite.product.bimg }}" alt="">
+                                            <a class="add-to-cart">
+                                                <button class="add-to-cart__button js-delete-favorite" data-id="{{ favorite.product.id }}">Удалить с избранного</button>
+                                            </a>
+                                        </span>
+                            <a href="{{ favorite.product.url }}" class="name-product">{{ favorite.product.info.name }}</a>
+                            <p class="price">$ {{ favorite.product.price }}</p>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    Вы не добавили товар в избранное
+                {% endif %}
+            </div>
+            </div>
+        </div>
+
+    </div>
+</div>

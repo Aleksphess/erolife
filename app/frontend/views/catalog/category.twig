@@ -1,0 +1,168 @@
+{{ use('frontend/widgets/SLinkPager') }}
+
+<div id="content">
+    <div class="category-block">
+        <div class="category-block__content">
+            <img src="{{ category.bimg }}" alt="">
+            <div class="category-block__content_text">
+                <h1 class="h1">{{ category.info.name }}</h1>
+                <p>{{ category.info.txt|raw }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="crumbs">
+        <ul class="breadcrumbs" itemscope="" itemtype="">
+            <li class="breadcrumbs-item" itemprop="" itemscope="" itemtype="">
+                <a class="breadcrumbs-link" itemscope="" itemtype="" itemprop="" href="{{ Url.home() }}"><span itemprop="">EROLIFE</span></a>
+                <meta itemprop="" content="1">
+            </li>
+            {% if category.parent.parent %}
+                <li class="breadcrumbs-item" itemprop="" itemscope="" itemtype="">
+                    <a class="breadcrumbs-link" itemscope="" itemtype="" itemprop="" href="{{ category.parent.parent.url }}"><span itemprop="">{{ category.parent.parent.info.name }}</span></a>
+                    <meta itemprop="" content="2">
+                </li>
+            {% endif %}
+            {% if category.parent %}
+            <li class="breadcrumbs-item" itemprop="" itemscope="" itemtype="">
+                <a class="breadcrumbs-link" itemscope="" itemtype="" itemprop="" href="{{ category.parent.url }}"><span itemprop="">{{ category.parent.info.name }}</span></a>
+                <meta itemprop="" content="2">
+            </li>
+            {% endif %}
+            <li class="breadcrumbs-item" itemprop="" itemscope="" itemtype="">
+                <a disabled class="breadcrumbs-link" itemscope="" itemtype="" itemprop="" ><span itemprop="">{{ category.info.name }}</span></a>
+                <meta itemprop="" content="2">
+            </li>
+        </ul>
+    </div>
+    <div class="category">
+        {% if category.childs %}
+        <ul class="category__subcategory">
+            {% for child in category.childs %}
+            <li class="category__subcategory_list">
+                <a href="{{ child.url }}">{{ child.info.name }}</a>
+            </li>
+            {% endfor %}
+
+        </ul>
+        {% endif %}
+        <div class="category__all-products">
+            <p class="h1">{{ catefory.info.name }}</p>
+            <div class="category__all-products_filters">
+                <form action="">
+                    <div class="geke-filter-item" data='{"name":"Акционные товары", "type":"list", "min":"", "max":"", "value":""}'>
+                        <input type="checkbox"  id="spoiler-1" />
+                        <label for="spoiler-1" >Акционные товары</label>
+                        <ul class="spoiler">
+                            <li data-id="1">
+                                <input type="radio" id="" name="subscribe" value="newsletter">
+                                <a>
+                                    <label class="active" for="">Test</label>
+                                </a>
+                            </li>
+                            <li data-id="2">
+                                <input type="radio" id="" name="subscribe" value="newsletter">
+                                <a>
+                                    <label for="">Test</label>
+                                </a>
+                            </li>
+                        </ul>
+                        <input type="hidden" value="" name="" class="geke-values">
+                    </div>
+
+                    {% for f in filter %}
+                    <div class="geke-filter-item" data='{"name":"Вибрация", "type":"list", "min":"", "max":"", "value":""}'>
+                        <input type="checkbox"  id="spoiler-2" />
+                        <label for="spoiler-2" >{{ f.name }}</label>
+                        <ul class="spoiler">
+                            {% for value in f.values %}
+                                <li data-id="{{ loop.index }}">
+                                    <input type="checkbox" {% if value.selected %} checked {% endif %}
+                                           onchange="document.location.href = $(this).siblings('a').attr('href')" id=""
+                                           name="subscribe" value="newsletter">
+                                    <a href="{{ value.url }}">
+                                        <label for>{{ value.value_name }}</label>({{ value.count }}) </a></li>
+
+                            {% endfor %}
+                        </ul>
+                        <input type="hidden" value="" name="" class="geke-values">
+                    </div>
+                    {% endfor %}
+
+                    <div class="geke-filter-item">
+                        <input type="checkbox"  id="spoiler-4" />
+                        <label for="spoiler-4" >Новости раздела</label>
+                        <ul class="spoiler">
+                            <li data-id="1">
+                                <div class="block-shares">
+                                    <div>
+                                        <p>СКИДКИ НА ТОВАРЫ ДЛЯ НЕГО!</p>
+                                        <p> -15% -20% -30%</p>
+                                    </div>
+                                    <img src="images/fucj-img.png" alt="">
+                                </div>
+                                <a class="share-name" href="news-item.php">Новые товары в разделе “Для нее”</a>
+                            </li>
+                            <li data-id="2">
+                                <div class="block-shares">
+                                    <div>
+                                        <p>СКИДКИ НА ТОВАРЫ ДЛЯ НЕГО!</p>
+                                        <p> -15% -20% -30%</p>
+                                    </div>
+                                    <img src="images/fucj-img.png" alt="">
+                                </div>
+                                <a class="share-name" href="news-item.php">Новые товары в разделе “Для нее”</a>
+                            </li>
+                        </ul>
+                    </div>
+                </form>
+            </div>
+            <div class="category__all-products_list-table">
+
+                <div id="1" class="w3-container tab" style="display:block">
+                    <div class="tab-content">
+                        <div class="blocks-fore-items">
+                            {% for product in products %}
+                            <div class="blocks-fore-items__item">
+                                        <span>
+                                            <img src="{{ product.bimg }}" alt="{{ product.info.name }}">
+                                            <a class="add-to-cart">
+                                                <button class="add-to-cart__button js-add-to-cart" data-id="{{ product.id }}">в корзину</button>
+                                            </a>
+                                        </span>
+                                <a href="{{ product.url }}" class="name-product">{{ product.info.name }}</a>
+                                {% if product.price_old %}<p class="price"><span>$ {{ product.price_old }}</span><span>{{ product.price }}</span></p>
+                                {% else %}<p class="price">$ {{ product.price }}</p>
+                                {% endif %}
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="more-pagination">
+                    <!--                        <a href="">-->
+                    <!--                            <button class="next">больше товаров</button>-->
+                    <!--                        </a>-->
+                    <div class="pagination">
+                        <ul>
+                            {{ s_link_pager_widget({
+                                'pagination' : pages,
+                                'maxButtonCount' : 3,
+                                'options' : {
+                                    'class' : 'pagination pagination-lg',
+                                },
+                                'linkOptions' : {
+                                    'class' : 'page-item',
+                                },
+                            }) }}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="seo-text">
+            {{ Seo.get('text')|raw }}
+        </div>
+    </div>
+</div>

@@ -1,0 +1,41 @@
+{{ use('frontend/widgets/SLinkPager') }}
+
+<div id="content">
+    <div class="crumbs">
+        <ul class="breadcrumbs" itemscope="" itemtype="">
+            <li class="breadcrumbs-item" itemprop="" itemscope="" itemtype="">
+                <a class="breadcrumbs-link" itemscope="" itemtype="" itemprop="" href="{{ Url.home() }}"><span itemprop="">EROLIFE</span></a>
+                <meta itemprop="" content="1">
+            </li>
+            <li class="breadcrumbs-item" itemprop="" itemscope="" itemtype="">
+                <a class="breadcrumbs-link" itemscope="" itemtype="" itemprop="" disabled><span itemprop="">Новости</span></a>
+                <meta itemprop="" content="2">
+            </li>
+
+        </ul>
+    </div>
+    <h1 class="h1">новости</h1>
+    <div class="news-page">
+       {% for new in news %}
+        <div class="news-page__item">
+            <img src="{{ new.bimg }}" alt="{{ new.info.title }}">
+            <a class="news-name" href="{{ new.url }}">{{ new.info.title }}</a>
+            <p class="news-date">{{ new.creation_time|date('d.m.Y') }}</p>
+        </div>
+       {% endfor  %}
+    </div>
+    <div class="pagination">
+        <ul>
+            {{ s_link_pager_widget({
+                'pagination' : pages,
+                'maxButtonCount' : 3,
+                'options' : {
+                    'class' : 'pagination pagination-lg',
+                },
+                'linkOptions' : {
+                    'class' : 'page-item',
+                },
+            }) }}
+        </ul>
+    </div>
+</div>

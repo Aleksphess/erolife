@@ -1,0 +1,16 @@
+{% if  app.user.identity.favorites  %}
+{% for favorite in app.user.identity.favorites %}
+    <div class="blocks-fore-items__item">
+                                        <span>
+                                            <img src="{{ favorite.product.bimg }}" alt="">
+                                            <a class="add-to-cart">
+                                                <button class="add-to-cart__button js-delete-favorite" data-id="{{ favorite.product.id }}">Удалить с избранного</button>
+                                            </a>
+                                        </span>
+        <a href="{{ favorite.product.url }}" class="name-product">{{ favorite.product.info.name }}</a>
+        <p class="price">$ {{ favorite.product.price }}</p>
+    </div>
+{% endfor %}
+{% else %}
+Вы не добавили товар в избранное
+{% endif %}

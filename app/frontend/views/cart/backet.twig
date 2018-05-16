@@ -1,0 +1,47 @@
+<div id="content">
+    <div class="crumbs">
+        <ul class="breadcrumbs" itemscope="" itemtype="">
+            <li class="breadcrumbs-item" itemprop="" itemscope="" itemtype="">
+                <a class="breadcrumbs-link" itemscope="" itemtype="" itemprop="" href="{{ Url.home() }}"><span itemprop="">EROLIFE</span></a>
+                <meta itemprop="" content="1">
+            </li>
+            <li class="breadcrumbs-item" itemprop="" itemscope="" itemtype="">
+                <a class="breadcrumbs-link" itemscope="" itemtype="" itemprop="" href="{{ Url.toRoute('/backet') }}"><span itemprop="">Корзина</span></a>
+                <meta itemprop="" content="2">
+            </li>
+
+        </ul>
+    </div>
+    <h1 class="h1">корзина</h1>
+    <div class="basket">
+        <ul class="basket__characteristics">
+            <li class="basket__characteristics_list">Фото</li>
+            <li class="basket__characteristics_list">Наименование товара</li>
+            <li class="basket__characteristics_list">Количество</li>
+            <li class="basket__characteristics_list">Стоимость</li>
+        </ul>
+        <div class="js-change">
+        {% for product in products %}
+        <div class="basket__item">
+            <img class="basket__item_img" src="{{ product.product.bimg }}" alt="">
+            <span class="basket__item_title">{{ product.product.info.name }}</span>
+            <div class="basket__item_number">
+                <span class="minus js-change-count" data-id="{{ product.product.id }}"><img src="/images/minus.svg" alt=""></span>
+                <input class="number_input number-{{ product.product.id }}" type="number" disabled value="{{ product.count }}" max="3" size="3">
+                <span class="plus js-change-count" data-id="{{ product.product.id }}"><img src="/images/plus.svg" alt=""></span>
+            </div>
+            <span class="basket__item_price">$ {{ product.product.price }}</span>
+        </div>
+        {% endfor %}
+
+        <div class="basket__info">
+            <p>К-во: <span class="basket__info_sum"> {{ count }} шт.</span></p>
+            <p>Сумма: <span class="basket__info_sum">  $ {{ fullprice }}</span></p>
+        </div>
+        <div class="basket__button">
+            <a class="next" href="{{ Url.home() }}">продолжить покупк</a>
+            <a class="next" href="{{ Url.toRoute('/order') }}">оформить заказ</a>
+        </div>
+        </div>
+    </div>
+</div>
